@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{width:300px;height: 300px; }
+        textarea{max-width: 300px;max-height: 300px;margin: 0 auto;}
+    </style>
+</head>
+<body>
+
+<div id="div">
+    <textarea id="div1" style=" resize: none;
+        width: 300px;height: 300px;
+    "></textarea>
+</div>
+
+<input type="submit" id="sub" value="add">
+<button id="btn" value="remove">remove</button>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js">
+
+</script>
+<script>
+    $('#sub').click(function(){
+       var value= $('#div1').val();
+        console.log(value);
+        $.ajax({
+            url:"http://localhost:3000",
+            type:'POST',
+            data:{name:value},
+            success:function(e){
+
+                var arr=''
+                for(var i in e){
+                    var num=e[i];
+                    
+                    for(var i in num){
+                        arr+=num[i].name+'<br>'
+                    }
+                }
+             $('#div').html(arr)
+            }
+        })
+    })
+$("#btn").click( function () { $(div).hide(); });
+</script>
+</body>
+</html>
